@@ -21,10 +21,17 @@ class SharedNotesSerializer(serializers.ModelSerializer):
         model = SharedNotes
         fields = ['id', 'notes', 'viewer']
 
-class UserSerializer(serializers.ModelSerializer):
-    notes = serializers.PrimaryKeyRelatedField(many=True, queryset=Notes.objects.all())
+# class UserSerializer(serializers.ModelSerializer):
+#     notes = serializers.PrimaryKeyRelatedField(many=True, queryset=Notes.objects.all())
+
+#     class Meta:
+#         model = User
+#         fields = ['id', 'username', 'notes']
+
+class UserSerializer(serializers.HyperlinkedModelSerializer):
+    notes = serializers.HyperlinkedRelatedField(many=True, view_name='note-detail', read_only=True)
 
     class Meta:
         model = User
-        fields = ['id', 'username', 'notes']
+        fields = ['url', 'id', 'username', 'notes']
 
