@@ -8,5 +8,5 @@ urlpatterns = format_suffix_patterns([
     path('notes/<int:pk>/', views.NoteDetail.as_view(),name='note-detail'),
     path('users/', views.UserList.as_view(),name='user-list'),
     path('users/<int:pk>/', views.UserDetail.as_view(),name='user-detail'),
-    # path('share/<int:pk>/',views.Share.as_view(),name='note-share'),
+    path('share/<int:note_id>/<int:viewer_id>/',views.shared_notes,name='note-share'),
 ])

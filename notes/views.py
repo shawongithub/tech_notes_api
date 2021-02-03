@@ -55,3 +55,21 @@ class UserDetail(generics.RetrieveAPIView):
 #         self.check_object_permissions(self.request, obj)
 #         return obj
 
+def shared_notes(request,note_id,viewer_id):
+    print('note_id=',note_id)
+    print('viewer_id=',viewer_id)
+    try:
+        note = Notes.objects.get(pk=note_id)
+    except Snippet.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+    try:
+        viewer = User.objects.get(pk=viewer_id)
+    except User.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+    print(note)
+    print(viewer)
+    shared_note= SharedNotes.objects.create(notes=note, viewer=viewer)
+    print(shared_note)
+
+
+
