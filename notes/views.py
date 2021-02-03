@@ -44,3 +44,14 @@ class UserList(generics.ListAPIView):
 class UserDetail(generics.RetrieveAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
+
+# class Share(generics.UpdateAPIView):
+#     permission_classes = [permissions.IsAuthenticatedOrReadOnly,IsOwnerOrReadOnly]
+#     queryset = Notes.objects.all()
+#     serializer_class = NotesSerializer
+
+#     def get_object(self):
+#         obj = get_object_or_404(self.get_queryset(), pk=self.kwargs["pk"])
+#         self.check_object_permissions(self.request, obj)
+#         return obj
+
