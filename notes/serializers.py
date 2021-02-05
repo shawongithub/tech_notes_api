@@ -14,12 +14,11 @@ class NotesSerializer(serializers.ModelSerializer):
 
 
 class SharedNotesSerializer(serializers.ModelSerializer):
-    notes = serializers.PrimaryKeyRelatedField(
-        many=True, queryset=Notes.objects.all())
-    viewer=serializers.ReadOnlyField(source='viewer.username')
+    note = serializers.PrimaryKeyRelatedField(queryset=Notes.objects.all())
+    viewer=serializers.PrimaryKeyRelatedField(queryset=Notes.objects.all())
     class Meta:
         model = SharedNotes
-        fields = ['id', 'notes', 'viewer']
+        fields = ['id', 'note', 'viewer']
 
 # class UserSerializer(serializers.ModelSerializer):
 #     notes = serializers.PrimaryKeyRelatedField(many=True, queryset=Notes.objects.all())
